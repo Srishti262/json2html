@@ -1,4 +1,4 @@
-
+import json2html from "https://srishti262.github.io/json2html/json2html.js";
 export default function json2html(data) {
 
     let html = '<table data-user="tech.srishti.nitb@gmail.com">';
