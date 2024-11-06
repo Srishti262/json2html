@@ -1,21 +1,21 @@
-import json2html from "https://srishti262.github.io/json2html/json2html.js";
+// json2html.js
 export default function json2html(data) {
+    // Get all unique keys to form the table headers
+    const columns = [...new Set(data.flatMap(Object.keys))];
 
-    let html = '<table data-user="tech.srishti.nitb@gmail.com">';
+    // Generate the HTML for the table
+    const html = `
+      <table data-user="tech.srishti.nitb@gmail.com">
+        <thead>
+          <tr>${columns.map(col => `<th>${col}</th>`).join('')}</tr>
+        </thead>
+        <tbody>
+          ${data.map(row => 
+            `<tr>${columns.map(col => `<td>${row[col] || ''}</td>`).join('')}</tr>`
+          ).join('')}
+        </tbody>
+      </table>
+    `;
 
-    html += "<thead><tr>";
-    const headers = new Set();
-    data.forEach(item => Object.keys(item).forEach(key => headers.add(key)));
-    headers.forEach(header => html += `<th>${header}</th>`);
-    html += "</tr></thead>";
-
-    html += "<tbody>";
-    data.forEach(row => {
-        html += "<tr>";
-        headers.forEach(header => html += `<td>${row[header] || ''}</td>`);
-        html += "</tr>";
-    });
-    html += "</tbody></table>";
-    
     return html;
 }
